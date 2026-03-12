@@ -1079,7 +1079,6 @@
           <div class="pill">Prime : <strong id="k_prime"></strong></div>
           <div class="pill">Coût réel : <strong id="k_costreal"></strong></div>
           <div class="pill">ROI (payback) : <strong id="k_roi"></strong></div>
-          <div class="pill">TRI : <strong id="k_tri" style="color:#22c55e"></strong></div>
         </div>
       </div>
 
@@ -1966,7 +1965,7 @@ if(lockKit){
             + '&lat='+lat+'&lon='+lon+'&raddatabase=PVGIS-SARAH2'
             + '&peakpower=1&loss=14&pvtechchoice=crystSi'
             + '&angle='+tiltDeg+'&aspect='+aspectDeg+'&usehorizon=1';
-    var url='https://corsproxy.io/?url='+encodeURIComponent(base);
+    var url='https://corsproxy.io/?apikey=a32495b2&url='+encodeURIComponent(base);
     var res=await fetch(url);
     if(!res.ok) throw new Error('PVGIS indisponible');
     var txt=await res.text();
@@ -2464,14 +2463,6 @@ if (isFinite(netB) && netB > 0) {
     document.getElementById('k_prime').textContent=EUR0.format((Number(document.getElementById('prime').value)||0));
     document.getElementById('k_costreal').textContent=EUR0.format(r.costReal);
     document.getElementById('k_roi').textContent=r.payback+' ans';
-    // Calcul TRI (IRR) — p et r sont disponibles ici
-    var _triEl = document.getElementById('k_tri');
-    if (_triEl) {
-      try {
-        var _triVal = buildPVIRR(p, r);
-        _triEl.textContent = (_triVal !== null && isFinite(_triVal)) ? (_triVal*100).toFixed(1)+' %' : '—';
-      } catch(e) { _triEl.textContent = '—'; }
-    }
   }
   function renderChart(p,pmaxInfo){
     var svg=document.getElementById('chart');
@@ -7409,7 +7400,7 @@ function applyFlatCardinalLockState(options={}){
       + '&angle=' + angle
       + '&aspect=' + Math.round(aspect)
       + '&usehorizon=1';
-    const url = 'https://corsproxy.io/?url=' + encodeURIComponent(base);
+    const url = 'https://corsproxy.io/?apikey=a32495b2&url=' + encodeURIComponent(base);
     const resp = await fetch(url);
     if (!resp.ok) throw new Error('PVGIS indisponible');
     const txt = await resp.text();
@@ -10219,7 +10210,7 @@ function applyFlatCardinalLockState(options={}){
             // Tuile Google Maps satellite (même source que la carte Leaflet)
             // via corsproxy.io pour contourner la restriction CORS
             var googleUrl = 'https://mt0.google.com/vt/lyrs=s&x=' + tx + '&y=' + ty + '&z=' + zoom;
-            var url = 'https://corsproxy.io/?url=' + encodeURIComponent(googleUrl);
+            var url = 'https://corsproxy.io/?apikey=a32495b2&url=' + encodeURIComponent(googleUrl);
 
             var loader = new THREE.TextureLoader();
             loader.crossOrigin = 'anonymous';
