@@ -1965,8 +1965,7 @@ if(lockKit){
             + '&lat='+lat+'&lon='+lon+'&raddatabase=PVGIS-SARAH2'
             + '&peakpower=1&loss=14&pvtechchoice=crystSi'
             + '&angle='+tiltDeg+'&aspect='+aspectDeg+'&usehorizon=1';
-    var url='https://corsproxy.io/?apikey=a32495b2&url='+encodeURIComponent(base);
-    var res=await fetch(url);
+    var res=await fetch(base);
     if(!res.ok) throw new Error('PVGIS indisponible');
     var txt=await res.text();
     var year=null, monthly=[];
@@ -7400,8 +7399,7 @@ function applyFlatCardinalLockState(options={}){
       + '&angle=' + angle
       + '&aspect=' + Math.round(aspect)
       + '&usehorizon=1';
-    const url = 'https://corsproxy.io/?apikey=a32495b2&url=' + encodeURIComponent(base);
-    const resp = await fetch(url);
+    const resp = await fetch(base);
     if (!resp.ok) throw new Error('PVGIS indisponible');
     const txt = await resp.text();
     let kwhKwcAn = null;
@@ -10210,7 +10208,7 @@ function applyFlatCardinalLockState(options={}){
             // Tuile Google Maps satellite (même source que la carte Leaflet)
             // via corsproxy.io pour contourner la restriction CORS
             var googleUrl = 'https://mt0.google.com/vt/lyrs=s&x=' + tx + '&y=' + ty + '&z=' + zoom;
-            var url = 'https://corsproxy.io/?apikey=a32495b2&url=' + encodeURIComponent(googleUrl);
+            var url = 'https://corsproxy.io/?apikey=3bd7da3c&url=' + encodeURIComponent(googleUrl);
 
             var loader = new THREE.TextureLoader();
             loader.crossOrigin = 'anonymous';
